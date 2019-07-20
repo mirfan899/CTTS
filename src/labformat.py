@@ -124,10 +124,13 @@ def add_head_middle_tail_silence(root_node, phs_type):
     if phs_type[-1] in ['s', 'd']:
         phone.rbrother = LabNode(txt='sil', rhythm='ph')
         phone.rbrother.lbrother = phone
+    print("Success till yet===================================================")
+
     return fphone
 
 
 def tree(words, rhythms, syllables, poses, phs_type=None):
+    print("checking words, rhythms and poses    ========================")
     assert len(words) == len(rhythms)
     assert len(words) == len(poses)
     assert len(''.join(words)) == len(syllables)
@@ -142,21 +145,23 @@ def tree(words, rhythms, syllables, poses, phs_type=None):
         tree_per_word(word, rhythm, tree_init, syllables_copy, poses_copy)
     # 增加一个#5，是多个#4句子的集合
     newNode = LabNode(sons=tree_init['#4'], index=1, rhythm='#5')
+
     """
     if phs_type:
         newNode.adjust()
     """
 
     #print('----show tree----')
-    #show([newNode], 0)
+    # show([newNode], 0)
     # show(tree_init['rhythm4'], 0)
 
     root_node = tree_init['#4'][0]
+    print("Checked words, rhythms and poses    ========================")
     return add_head_middle_tail_silence(root_node, phs_type)
 
 
 if __name__ == '__main__':
-    txt = '继续#0把#0建设#0有#0中国#0特色#3社会#0主义#0事业#4推向#0前进'
+    txt = '嗰一隻糭呢係豆沙糭嚟嘅，係馮曉立前一日喺超級市場嗰度買嘅。係一隻奇華嘅糭啦。咁佢就話拾三十分鐘食得不過最後我哋廿分鐘其實都好喇。'
     times = [
         0, 264200, 360650, 492100, 596550, 737200, 774550, 989300, 1048049,
         1211600, 1295550, 1417500, 1483700, 1644000, 1685300, 1719600, 1894300,

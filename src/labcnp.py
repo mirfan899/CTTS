@@ -51,7 +51,8 @@ formation=[
 class LabGenerator(object):
     def __init__(self, phone, rhythms, times=None):
         assert phone.rhythm == 'ph'
-        self.phone = copy.deepcopy(phone)
+        # DeepCopy causes issues.
+        self.phone = copy.copy(phone)
         self.adict = {}
         self.rhythms = rhythms
         self.times = times

@@ -5,22 +5,27 @@
 from __future__ import unicode_literals
 import re
 import os
-from jieba import posseg
 from labcnp import LabGenerator
 from labformat import tree
-from txt2pinyin import txt2pinyin
+from txt2pinyin import txt2pinyin, seprate_syllable
+from jyutping import get_jyutping
+import sys
+sys.path.append('..')
+print(sys.path)
+from MTTS.sppas import segment
+from MTTS.pos import pos
 
 
 def _adjust(prosody_txt):
-    '''Make sure that segment word is smaller than prosody word'''
+    """Make sure that segment word is smaller than prosody word"""
     prosody_words = re.split('#\d', prosody_txt)
     rhythms = re.findall('#\d', prosody_txt)
     txt = ''.join(prosody_words)
-    words = []
-    poses = []
-    for word, pos in posseg.cut(txt):
-        words.append(word)
-        poses.append(pos[0])
+    print("Calling _adjust===============================")
+    # add Cantonese segmentation and pos
+    wrd = segment.segmentation(sentence=txt)
+    words, poses = pos.get_tags(wrd)
+
     index = 0
     insert_time = 0
     length = len(prosody_words[index])
@@ -28,12 +33,12 @@ def _adjust(prosody_txt):
     while i < len(words):
         done = False
         while not done:
-            if (len(words[i]) > length):
-                #print(words[i], prosody_words[index])
+            if len(words[i]) > length:
+                # print(words[i], prosody_words[index])
                 length += len(prosody_words[index + 1])
                 rhythms[index] = ''
                 index += 1
-            elif (len(words[i]) < length):
+            elif len(words[i]) < length:
                 # print(' less than ', words[i], prosody_words[index])
                 rhythms.insert(index + insert_time, '#0')
                 insert_time += 1
@@ -45,18 +50,17 @@ def _adjust(prosody_txt):
                 done = True
                 index += 1
         else:
-            if (index < len(prosody_words)):
+            if index < len(prosody_words):
                 length = len(prosody_words[index])
             i += 1
     if rhythms[-1] != '#4':
         rhythms.append('#4')
     rhythms = [x for x in rhythms if x != '']
-    # print(rhythms)
     return (words, poses, rhythms)
 
 
 def txt2label(txt, sfsfile=None, style='default'):
-    '''Return a generator of HTS format label of txt.
+    """Return a generator of HTS format label of txt.
 
     Args:
         txt: like raw txt "向香港特别行政区同胞澳门台湾同胞"
@@ -80,7 +84,7 @@ def txt2label(txt, sfsfile=None, style='default'):
 
     Return:
         A generator of phone label for the txt, convenient to save as a label file
-    '''
+    """
     assert style == 'default', 'Currently only default style is support in txt2label'
 
     # delete all character which is not number && alphabet && chinese word
@@ -92,16 +96,20 @@ def txt2label(txt, sfsfile=None, style='default'):
         words, poses, rhythms = _adjust(txt)
     else:
         txt = re.sub('[,.，。]', '#4', txt)
-        words = []
-        poses = []
-        for word, pos in posseg.cut(txt):
-            words.append(word)
-            poses.append(pos[0])
+        wrd = segment.segmentation(sentence=txt)
+        words, poses = pos.get_tags(wrd)
+
         rhythms = ['#0'] * (len(words) - 1)
         rhythms.append('#4')
+    print(len(rhythms))
+    print(len(words))
+    print(len(poses))
+    # syllables = txt2pinyin(''.join(words))
 
-    syllables = txt2pinyin(''.join(words))
+    # txt2jyutping
 
+    jyut = get_jyutping("".join(words))
+    syllables = [seprate_syllable(j) for j in jyut]
     phone_num = 0
     for syllable in syllables:
         phone_num += len(syllable)  # syllable is like ('b', 'a3')
@@ -160,6 +168,7 @@ def _txt_preprocess(txtfile, output_path):
                 re.search('(?<!#)\d', txt)):
             error_list.append(num)
         else:
+            # some shit going on here
             txt = re.sub('[,.，。]', '#4', txt)
             txt = pattern.sub('', txt)
             # 去除除了韵律标注'#'之外的所有非中文文本, 数字, 英文字符符号

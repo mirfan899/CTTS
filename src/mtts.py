@@ -3,11 +3,16 @@ import re
 import logging
 from pypinyin import pinyin, Style, load_phrases_dict
 import textgrid as tg
+from jyutping import get_jyutping
 from mandarin_frontend import txt2label
+import textgrid
 
+# consonant = [
+#     'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh',
+#     'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w'
+# ]
 consonant = [
-    'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh',
-    'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w'
+    'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'ng', 'h', 'gw', 'kw', 'w', 'z', 'c', 's', 'j'
 ]
 
 
@@ -22,15 +27,19 @@ def _add_lab(txtlines, wav_dir_path):
     logger = logging.getLogger('mtts')
     for line in txtlines:
         numstr, txt = line.split(' ')
+        # remove prosody marks
         txt = re.sub('#\d', '', txt)
-        pinyin_list = pinyin(txt, style=Style.TONE3)
-        new_pinyin_list = []
+        # add jyutping
+        # pinyin_list = pinyin(txt, style=Style.TONE3)
+        pinyin_list = get_jyutping(txt)
+        # pinyin_list = [[item] for item in pinyin_list]
+        new_pinyin_list = pinyin_list
         for item in pinyin_list:
             if not item:
                 logger.warning(
-                    '{file_num} do not generate right pinyin'.format(numstr))
+                    '{} do not generate right pinyin'.format(numstr))
             if not item[0][-1].isdigit():
-                phone = item[0] + '5'
+                phone = item[0] + '6'
             else:
                 phone = item[0]
             new_pinyin_list.append(phone)
@@ -46,17 +55,18 @@ def _add_pinyin(txtlines, output_path):
     for line in txtlines:
         numstr, txt = line.split(' ')
         txt = re.sub('#\d', '', txt)
-        pinyin_list = pinyin(txt, style=Style.TONE3)
-        new_pinyin_list = []
+        # pinyin_list = pinyin(txt, style=Style.TONE3)
+        pinyin_list = get_jyutping(txt)
+        new_pinyin_list = pinyin_list
         for item in pinyin_list:
             if not item:
                 logger.warning(
-                    '{file_num} do not generate right pinyin'.format(numstr))
+                    '{} do not generate right pinyin'.format(numstr))
             if not item[0][-1].isdigit():
-                phone = item[0] + '5'
+                phone = item[0] + '6'
             else:
-                #phone = item[0]
-                phone = item[0].replace('v', 'u')
+                phone = item[0]
+                # phone = item[0].replace('v', 'u')
             new_pinyin_list.append(phone)
         all_pinyin.append(numstr + ' ' + ' '.join(new_pinyin_list))
     all_pinyin_file = os.path.join(output_path, 'all_pinyin.lab')
@@ -79,7 +89,8 @@ def _txt_preprocess(txtfile, output_path):
                 re.search('(?<!#)\d', txt)):
             error_list.append(num)
         else:
-            txt = re.sub('[,.，。]', '#4', txt)
+            # why use #4 for symbols?
+            txt = re.sub('[,.，。]', '', txt)
             txt = pattern.sub('', txt)
             # 去除除了韵律标注'#'之外的所有非中文文本, 数字, 英文字符符号
             if txt:
@@ -120,12 +131,14 @@ def _mfa_align(txtlines, wav_dir_path, output_path, acoustic_model_path):
     base_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
     os.makedirs('%s/wav' % output_path, exist_ok=True)
     wav_dir_real_path = os.path.realpath(wav_dir_path)
-    symbolic_path = '%s/wav/mandarin_voice' % output_path
+    symbolic_path = '%s/wav/cantonese_voice' % output_path
+    # symbolic_path = '%s/wav/mandarin_voice' % output_path
     if not os.path.exists(symbolic_path):
         os.system('ln -s %s %s' % (wav_dir_real_path, symbolic_path))
     mfa_align_path = os.path.join(
         base_dir, 'tools/montreal-forced-aligner/bin/mfa_align')
-    lexicon_path = os.path.join(base_dir, 'misc/mandarin_mtts.lexicon')
+    # lexicon_path = os.path.join(base_dir, 'misc/mandarin_mtts.lexicon')
+    lexicon_path = os.path.join(base_dir, 'misc/cantonese_mtts.lexicon')
     acoustic_model_path = os.path.join(base_dir, acoustic_model_path)
 
     exec_result = os.system('%s %s/wav %s %s %s/textgrid' %
@@ -138,7 +151,8 @@ def _mfa_align(txtlines, wav_dir_path, output_path, acoustic_model_path):
 
 def _textgrid2sfs(txtlines, output_path):
     logger = logging.getLogger('mtts')
-    textgrid_path = os.path.join(output_path, 'textgrid/mandarin_voice')
+    textgrid_path = os.path.join(output_path, 'textgrid')
+    # textgrid_path = os.path.join(output_path, 'textgrid/mandarin_voice')
     sfs_path = os.path.join(output_path, 'sfs')
     csv_path = os.path.join(output_path, 'csv')
     os.system('mkdir -p %s' % sfs_path)
@@ -195,6 +209,7 @@ def _sfs2label(txtlines, output_path):
             except Exception:
                 logger.error(
                     'Error at %s, please check your txt %s' % (numstr, txt))
+                exit()
             else:
                 with open(label_file, 'w') as oid:
                     for item in label_line:
@@ -225,11 +240,12 @@ def _set_logger(output_path):
 def generate_label(txtfile, wav_dir_path, output_path, acoustic_model_path):
     _set_logger(output_path)
     txtlines = _txt_preprocess(txtfile, output_path)
-    _pre_pinyin_setting()
-    _add_lab(txtlines, wav_dir_path)
+    # _pre_pinyin_setting()
+    # _add_lab(txtlines, wav_dir_path)
     #_add_pinyin(txtlines, output_path)
-    _mfa_align(txtlines, wav_dir_path, output_path, acoustic_model_path)
+    # _mfa_align(txtlines, wav_dir_path, output_path, acoustic_model_path)
     _textgrid2sfs(txtlines, output_path)
+    print("running sfs2label=============================")
     _sfs2label(txtlines, output_path)
 
     logger = logging.getLogger('mtts')

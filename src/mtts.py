@@ -7,10 +7,6 @@ from jyutping import get_jyutping
 from mandarin_frontend import txt2label
 import textgrid
 
-# consonant = [
-#     'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh',
-#     'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w'
-# ]
 consonant = [
     'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'ng', 'h', 'gw', 'kw', 'w', 'z', 'c', 's', 'j'
 ]
@@ -32,8 +28,8 @@ def _add_lab(txtlines, wav_dir_path):
         # add jyutping
         # pinyin_list = pinyin(txt, style=Style.TONE3)
         pinyin_list = get_jyutping(txt)
-        # pinyin_list = [[item] for item in pinyin_list]
-        new_pinyin_list = pinyin_list
+        pinyin_list = [[item] for item in pinyin_list]
+        new_pinyin_list = []
         for item in pinyin_list:
             if not item:
                 logger.warning(
@@ -240,14 +236,15 @@ def _set_logger(output_path):
 def generate_label(txtfile, wav_dir_path, output_path, acoustic_model_path):
     _set_logger(output_path)
     txtlines = _txt_preprocess(txtfile, output_path)
-    # _pre_pinyin_setting()
-    # _add_lab(txtlines, wav_dir_path)
+    _add_lab(txtlines, wav_dir_path)
     #_add_pinyin(txtlines, output_path)
     # _mfa_align(txtlines, wav_dir_path, output_path, acoustic_model_path)
-    _textgrid2sfs(txtlines, output_path)
-    print("running sfs2label=============================")
-    _sfs2label(txtlines, output_path)
-
+    # _textgrid2sfs(txtlines, output_path)
+    # print("running sfs2label=============================")
+    # _sfs2label(txtlines, output_path)
+    #
+    print("Exiting the process===========")
+    exit()
     logger = logging.getLogger('mtts')
     logger.info('the label files are in {}/labels'.format(output_path))
     logger.info('the error log is in {}/mtts.log'.format(output_path))

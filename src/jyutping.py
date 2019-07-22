@@ -27,6 +27,8 @@ def get_jyutping(characters):
     result = []
     for ch in characters:
         result.append(search_single(ch))
+
+    assert len(list(characters)) == len(result)
     return result
 
 

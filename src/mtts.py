@@ -44,6 +44,32 @@ def _add_lab(txtlines, wav_dir_path):
             oid.write(' '.join(new_pinyin_list))
 
 
+def _add_jyutping_txt(txtlines, path=None):
+    logger = logging.getLogger('mtts')
+    print(path)
+    for line in txtlines:
+        numstr, txt = line.split(' ')
+        # remove prosody marks
+        txt = re.sub('#\d', '', txt)
+        # add jyutping
+        # pinyin_list = pinyin(txt, style=Style.TONE3)
+        pinyin_list = get_jyutping(txt)
+        pinyin_list = [[item] for item in pinyin_list]
+        new_pinyin_list = []
+        for item in pinyin_list:
+            if not item:
+                logger.warning(
+                    '{} do not generate right pinyin'.format(numstr))
+            if not item[0][-1].isdigit():
+                phone = item[0] + '6'
+            else:
+                phone = item[0]
+            new_pinyin_list.append(phone)
+        lab_file = os.path.join(path, numstr + '.txt')
+        with open(lab_file, 'w') as oid:
+            oid.write(' '.join(new_pinyin_list))
+
+
 def _add_pinyin(txtlines, output_path):
     ''' txt2pinyin in one file '''
     logger = logging.getLogger('mtts')
@@ -53,7 +79,8 @@ def _add_pinyin(txtlines, output_path):
         txt = re.sub('#\d', '', txt)
         # pinyin_list = pinyin(txt, style=Style.TONE3)
         pinyin_list = get_jyutping(txt)
-        new_pinyin_list = pinyin_list
+        new_pinyin_list = []
+        pinyin_list = [[item] for item in pinyin_list]
         for item in pinyin_list:
             if not item:
                 logger.warning(
@@ -62,7 +89,6 @@ def _add_pinyin(txtlines, output_path):
                 phone = item[0] + '6'
             else:
                 phone = item[0]
-                # phone = item[0].replace('v', 'u')
             new_pinyin_list.append(phone)
         all_pinyin.append(numstr + ' ' + ' '.join(new_pinyin_list))
     all_pinyin_file = os.path.join(output_path, 'all_pinyin.lab')
@@ -237,14 +263,13 @@ def generate_label(txtfile, wav_dir_path, output_path, acoustic_model_path):
     _set_logger(output_path)
     txtlines = _txt_preprocess(txtfile, output_path)
     _add_lab(txtlines, wav_dir_path)
-    #_add_pinyin(txtlines, output_path)
+    _add_jyutping_txt(txtlines, path="data/cantonese_demo/jyutping/")
+    # _add_pinyin(txtlines, output_path)
     # _mfa_align(txtlines, wav_dir_path, output_path, acoustic_model_path)
     # _textgrid2sfs(txtlines, output_path)
     # print("running sfs2label=============================")
     # _sfs2label(txtlines, output_path)
     #
-    print("Exiting the process===========")
-    exit()
     logger = logging.getLogger('mtts')
     logger.info('the label files are in {}/labels'.format(output_path))
     logger.info('the error log is in {}/mtts.log'.format(output_path))

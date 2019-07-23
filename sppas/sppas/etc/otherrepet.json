@@ -1,0 +1,43 @@
+{
+  "id": "otherrepet",
+  "name": "Other-Repetitions",
+  "descr": "Searches for sources and echos of two speakers. Requires time-aligned tokens of 2 speakers.",
+  "required": "alignment",
+  "api": "sppasOtherRepet",
+
+  "anntype": [
+    "INTERACTION"
+  ],
+
+  "resources": [
+    {
+      "path": "vocab",
+      "type": "file",
+      "ext": ".stp",
+      "name": ""
+    }
+  ],
+
+  "options": [
+    {
+      "id": "span",
+      "type": "int",
+      "value": 5,
+      "text": "Span window length in number of IPUs"
+    },
+
+    {
+      "id": "stopwords",
+      "type": "bool",
+      "value": true,
+      "text": "Add stop-words estimated from the given data"
+    },
+
+    {
+      "id": "alpha",
+      "type": "float",
+      "value": 0.5,
+      "text": "Coefficient to add data-specific stop-words"
+    }
+  ]
+}

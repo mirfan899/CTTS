@@ -1,0 +1,23 @@
+{
+  "id": "activity",
+  "name": "Activity",
+  "descr": "Create a tier with the speech activities and their duration. Requires time-aligned tokens",
+  "required": "alignment",
+  "api": "sppasActivity",
+
+  "anntype": [
+    "STANDALONE"
+  ],
+
+  "resources": [],
+
+  "options": [
+    {
+      "id": "duration",
+      "type": "bool",
+      "value": true,
+      "text": "Create a tier with the duration of each activity."
+    }
+
+  ]
+}

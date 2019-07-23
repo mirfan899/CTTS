@@ -1,0 +1,13 @@
+{
+  "__version__": "2.3",
+  "__author__":  "Brigitte Bigi",
+  "__contact__": "contact@sppas.org",
+  "__copyright__": "Copyright (C) 2011-2019 Brigitte Bigi",
+  "__license__": "GNU Public License, version 3",
+  "__docformat__": "reStructedText en",
+  "__name__": "SPPAS",
+  "__title__": "the automatic annotation and analysis of speech",
+  "__url__": "http://www.sppas.org/",
+  "__summary__": "SPPAS produces automatically annotations\nfrom a recorded speech sound and its transcription\nand performs the analysis of any annotated data.",
+  "__encoding__": "utf-8"
+}

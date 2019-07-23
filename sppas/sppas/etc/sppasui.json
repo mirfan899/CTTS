@@ -1,0 +1,88 @@
+{
+  "annotate": [
+    {
+      "id": "momel",
+      "config": "momel.json",
+      "cli": "momel.py"
+    },
+
+    {
+      "id": "intsint",
+      "config": "intsint.json",
+      "cli": "intsint.py"
+    },
+
+    {
+      "id": "fillipus",
+      "config": "fillipus.json",
+      "cli": "fillipus.py"
+    },
+
+    {
+      "id": "searchipus",
+      "config": "searchipus.json",
+      "cli": "searchipus.py"
+    },
+
+    {
+      "id": "textnorm",
+      "config": "textnorm.json",
+      "cli": "normalize.py"
+    },
+
+    {
+      "id": "phonetize",
+      "config": "phonetize.json",
+      "cli": "phonetize.py"
+    },
+
+    {
+      "id": "alignment",
+      "config": "alignment.json",
+      "cli": "alignment.py"
+    },
+
+    {
+      "id": "syllabify",
+      "config": "syllabify.json",
+      "cli": "syllabify.py"
+    },
+
+    {
+      "id": "tga",
+      "config": "tga.json",
+      "cli": "tga.py"
+    },
+
+    {
+      "id": "activity",
+      "config": "activity.json",
+      "cli": ""
+    },
+
+    {
+      "id": "selfrepet",
+      "config": "selfrepet.json",
+      "cli": "selfrepetition.py"
+    },
+
+    {
+      "id": "otherrepet",
+      "config": "otherrepet.json",
+      "cli": "otherrepetition.py"
+    }
+  ],
+
+  "analyze":
+  {
+    "id": "datastats",
+    "cli": "stats.py"
+  },
+
+  "manage":
+  {
+    "id": "convert",
+    "cli": "trsconvert.py"
+  }
+
+}

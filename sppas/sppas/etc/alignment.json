@@ -1,0 +1,43 @@
+{
+  "id": "alignment",
+  "name": "Alignment",
+  "descr": "Time aligns the phonetization to audio, and also the tokenizetion if available.",
+  "required": "phonetize",
+  "api": "sppasAlign",
+
+  "anntype": [
+    "STANDALONE"
+  ],
+
+  "resources": [
+    {
+      "path": "models",
+      "type": "directory",
+      "ext": "",
+      "name": "models-"
+    }
+  ],
+
+  "options": [
+    {
+      "id": "aligner",
+      "type": "string",
+      "value": "julius",
+      "text": "Speech automatic aligner system (julius, hvite, basic)"
+    },
+
+    {
+      "id": "basic",
+      "type": "bool",
+      "value": false,
+      "text": "Perform basic alignment if the aligner fails"
+    },
+
+    {
+      "id": "clean",
+      "type": "bool",
+      "value": true,
+      "text": "Remove working directory"
+    }
+  ]
+}

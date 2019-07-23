@@ -1,0 +1,47 @@
+{
+  "id": "syllabify",
+  "name": "Syllabification",
+  "descr": "Uses of rules to group aligned phonemes into syllables. Requires time-aligned phonemes.",
+  "required": "alignment",
+  "api": "sppasSyll",
+
+  "resources": [
+    {
+      "path": "syll",
+      "type": "file",
+      "ext": ".txt",
+      "name": "syllConfig-"
+    }
+  ],
+
+  "options": [
+    {
+      "id": "usesphons",
+      "type": "bool",
+      "value": true,
+      "text": "Syllabify inside the IPU intervals"
+    },
+
+    {
+      "id": "usesintervals",
+      "type": "bool",
+      "value": false,
+      "text": "Syllabify inside an interval tier"
+    },
+
+    {
+      "id": "tiername",
+      "type": "string",
+      "value": "TokensAlign",
+      "text": "Tier name for such interval tier:"
+    },
+
+    {
+      "id": "createclasses",
+      "type": "bool",
+      "value": true,
+      "text": "Create a tier with syllable classes"
+    }
+
+  ]
+}

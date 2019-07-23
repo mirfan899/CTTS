@@ -1,2 +1,4 @@
 jieba
 pypinyin
+pandas
+nltk

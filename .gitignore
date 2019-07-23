@@ -11,3 +11,5 @@ docs/_build/*
 thchs30_250_demo.tar.gz
 docs/.vscode
 .mtts
+sppas/.logs
+sppas/.trash

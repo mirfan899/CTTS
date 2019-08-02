@@ -1,29 +1,4 @@
 #! /usr/bin/env python
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-r"""Generate HTS question file from json phonology.
-
-Questions are generated according to the [1] format with support for Merlin CQS
-tags.
-
-[1] -
-https://wiki.inf.ed.ac.uk/twiki/pub/CSTR/F0parametrisation/hts_lab_format.pdf
-
-Usage
-  ./festival_utils/generate_hts_questions.py si/festvox/ipa_phonology.json
-"""
 
 __author__ = "virtuoso.irfan@gmail.com(Muhammad Irfan)"
 
@@ -112,35 +87,39 @@ CQS "Num-Words_in_Utterance"                      {+(\d+)-}
 CQS "Num-Phrases_in_Utterance"                    {-(\d+)}
 """
 
-NASAL_VOWEL_QUESTIONS = [["L-Nasal_Vowel", "*^%s?-*"]]
-SIMPLE_FINAL_QUESTIONS = [["L-Simple_Vowel", "*^%s?-*"]]
-COMPOUND_FINAL_QUESTIONS = [["L-Compound_Vowel", "*^%s?-*"]]
+NASAL_VOWEL_QUESTIONS = [["C-Nasal_Vowel", "*-%s?+*"]]
+SIMPLE_FINAL_QUESTIONS = [["C-Simple_Vowel", "*-%s?+*"]]
+COMPOUND_FINAL_QUESTIONS = [["C-Compound_Vowel", "*-%s?+*"]]
 
-TYPEA_QUESTIONS = [["L-TypeA", "*^%s?-*"]]
-TYPEE_QUESTIONS = [["L-TypeE", "*^%s?-*"]]
-TYPEI_QUESTIONS = [["L-TypeI", "*^%s?-*"]]
-TYPEO_QUESTIONS = [["L-TypeO", "*^%s?-*"]]
-TYPEU_QUESTIONS = [["L-TypeU", "*^%s?-*"]]
-TYPEV_QUESTIONS = [["L-TypeV", "*^%s?-*"]]
+ANTERIOR_NASAL_VOWEL_QUESTIONS = [["C-Anterior_Nasal_Vowel", "*-%s?+*"]]
+POSTERIOR_NASAL_VOWEL_QUESTIONS = [["C-Posterior_Nasal_Vowel", "*-%s?+*"]]
 
-ANTERIOR_NASAL_VOWEL_QUESTIONS = [["L-Anterior_Nasal_Vowel", "*^%s?-*"]]
-POSTERIOR_NASAL_VOWEL_QUESTIONS = [["L-Posterior_Nasal_Vowel", "*^%s?-*"]]
+TYPEA_QUESTIONS = [["C-TypeA", "*-%s?+*"]]
+TYPEE_QUESTIONS = [["C-TypeE", "*-%s?+*"]]
+TYPEI_QUESTIONS = [["C-TypeI", "*-%s?+*"]]
+TYPEO_QUESTIONS = [["C-TypeO", "*-%s?+*"]]
+TYPEU_QUESTIONS = [["C-TypeU", "*-%s?+*"]]
+TYPEV_QUESTIONS = [["C-TypeV", "*-%s?+*"]]
 
-STOP_QUESTIONS = [["L-Stop", "*^%s-*"]]
-ASPIRATED_STOP_QUESTIONS = [["L-Aspirated_Sto", "*^%s-*"]]
-UNASPIRATED_STOP_QUESTIONS = [["L-Unaspirated_Stop", "*^%s-*"]]
+STOP_QUESTIONS = [["C-Stop", "*-%s+*"]]
+ASPIRATED_STOP_QUESTIONS = [["C-Aspirated_Sto", "*-%s+*"]]
+UNASPIRATED_STOP_QUESTIONS = [["C-Unaspirated_Stop", "*-%s+*"]]
 
-AFFRICATE_QUESTIONS = [["L-Affricate", "*^%s-*"]]
-ASPIRATED_AFFRICATE_QUESTIONS = [["L-Aspirated_Affricate", "*^%s-*"]]
-UNASPIRATED_AFFRICATE_QUESTIONS = [["L-Unaspirated_Affricate", "*^%s-*"]]
+AFFRICATE_QUESTIONS = [["C-Affricate", "*-%s+*"]]
+ASPIRATED_AFFRICATE_QUESTIONS = [["C-Aspirated_Affricate", "*-%s+*"]]
+UNASPIRATED_AFFRICATE_QUESTIONS = [["C-Unaspirated_Affricate", "*-%s+*"]]
 
-FRICATIVE_QUESTIONS = [["L-Fricative", "*^%s-*"]]
-VOICELESS_FRICATIVE_QUESTIONS = [["L-Voiceless_Fricative", "*^%s-*"]]
+FRICATIVE_QUESTIONS = [["C-Fricative", "*-%s+*"]]
+VOICELESS_FRICATIVE_QUESTIONS = [["C-Voiceless_Fricative", "*-%s+*"]]
 
-NASAL_QUESTIONS = [["L-Nasal", "*^%s-*"]]
+NASAL_QUESTIONS = [["C-Nasal", "*-%s+*"]]
 
-LABIAL_QUESTIONS = [["L-Labial", "*^%s-*"]]
-LABIAL2_QUESTIONS = [["L-Labial", "*^%s-*"]]
+LABIAL_QUESTIONS = [["C-Labial", "*-%s+*"]]
+LABIAL2_QUESTIONS = [["C-Labial", "*-%s+*"]]
+
+INITIAL_QUESTIONS = [["R-initial", "*-%s+*"]]
+FINAL_QUESTIONS = [["R-final", "*-%s+*"]]
+SILENCE_QUESTIONS = [["R-silence", "*-%s+*"]]
 
 Stop = ["p", "t", "k", "b", "d", "g"]
 Aspirated_Stop = ["p", "t", "k"]
@@ -307,6 +286,23 @@ def main():
     l2 = ",".join(l2)
     content += "QS \"%s\"\t\t\t\t{%s}\n" % (LABIAL2_QUESTIONS[0][0], l2)
 
+    i = []
+    for v in initial:
+        i.append(INITIAL_QUESTIONS[0][1] % v)
+    i = ",".join(i)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (INITIAL_QUESTIONS[0][0], i)
+
+    f = []
+    for v in final:
+        f.append(FINAL_QUESTIONS[0][1] % v)
+    f = ",".join(f)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (FINAL_QUESTIONS[0][0], f)
+
+    s = []
+    for v in silence:
+        s.append(SILENCE_QUESTIONS[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (SILENCE_QUESTIONS[0][0], s)
     print(content)
 
 

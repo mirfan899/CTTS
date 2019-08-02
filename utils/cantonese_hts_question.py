@@ -28,7 +28,6 @@ Usage
 __author__ = "virtuoso.irfan@gmail.com(Muhammad Irfan)"
 
 import io
-import json
 import sys
 
 STDOUT = io.open(1, mode="wt", encoding="utf-8", closefd=False)
@@ -137,6 +136,11 @@ UNASPIRATED_AFFRICATE_QUESTIONS = [["L-Unaspirated_Affricate", "*^%s-*"]]
 
 FRICATIVE_QUESTIONS = [["L-Fricative", "*^%s-*"]]
 VOICELESS_FRICATIVE_QUESTIONS = [["L-Voiceless_Fricative", "*^%s-*"]]
+
+NASAL_QUESTIONS = [["L-Nasal", "*^%s-*"]]
+
+LABIAL_QUESTIONS = [["L-Labial", "*^%s-*"]]
+LABIAL2_QUESTIONS = [["L-Labial", "*^%s-*"]]
 
 Stop = ["p", "t", "k", "b", "d", "g"]
 Aspirated_Stop = ["p", "t", "k"]
@@ -273,49 +277,37 @@ def main():
         unp.append(UNASPIRATED_AFFRICATE_QUESTIONS[0][1] % v)
     unp = ",".join(unp)
     content += "QS \"%s\"\t\t\t\t{%s}\n" % (UNASPIRATED_AFFRICATE_QUESTIONS[0][0], unp)
+    # Fricative ==================================================================
+    f = []
+    for v in Fricative:
+        f.append(FRICATIVE_QUESTIONS[0][1] % v)
+    f = ",".join(f)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (FRICATIVE_QUESTIONS[0][0], f)
+    vf = []
+    for v in Fricative:
+        vf.append(VOICELESS_FRICATIVE_QUESTIONS[0][1] % v)
+    vf = ",".join(vf)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (VOICELESS_FRICATIVE_QUESTIONS[0][0], vf)
+    # Nasal ==================================================================
+    n = []
+    for v in Nasal:
+        n.append(NASAL_QUESTIONS[0][1] % v)
+    n = ",".join(n)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (NASAL_QUESTIONS[0][0], n)
+    # Labial ==================================================================
+    l = []
+    for v in Labial:
+        l.append(LABIAL_QUESTIONS[0][1] % v)
+    l = ",".join(l)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (LABIAL_QUESTIONS[0][0], l)
 
+    l2 = []
+    for v in Labial2:
+        l2.append(LABIAL2_QUESTIONS[0][1] % v)
+    l2 = ",".join(l2)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (LABIAL2_QUESTIONS[0][0], l2)
 
-    # for qs in NASAL_VOWEL_QUESTIONS:
-    #     for phoneinfo in Nasal_Vowel:
-    #         content += "QS \"%s-%s\"\t\t\t\t{%s}\n" % (qs[0], phoneinfo,
-    #                                                    qs[1] % phoneinfo)
     print(content)
-
-    # Add phoneme questions.
-    #  - Example - QS "C-uw"  {-uw+}
-    # for qs in PHONEME_QUESTIONS:
-    #     for phoneinfo in phonology["phones"]:
-    #         phoneme = phoneinfo[0]
-    #         content += "QS \"%s-%s\"\t\t\t\t{%s}\n" % (qs[0], phoneme,
-    #                                                    qs[1] % (phoneme))
-    #
-    # # Add phoneme feature questions.
-    # qs_list = {}
-    # for phoneinfo in phonology["phones"]:
-    #     phoneme = phoneinfo[0]
-    #     features = phoneinfo[1:]
-    #
-    #     for feature in features:
-    #         if feature in qs_list:
-    #             qs_list.get(feature).append(phoneme)
-    #         else:
-    #             qs_list.update({feature: [phoneme]})
-    #
-    # # Example phoneme feature question.
-    # # - QS "C-Vowel"  {-aa+,-ae+,-ah+}
-    # for x in qs_list:
-    #     content += "QS \"C-" + x + "\"\t\t\t\t{%s}\n" % (
-    #         ",".join([("*^%s?-*") % y for y in qs_list.get(x)]))
-    #
-    # # Add syllabification questions.
-    # # Example - QS "C-Syl_aa"  {|aa/C:}
-    # for x in qs_list:
-    #     content += "QS \"C-Syl-" + x + "\"\t\t\t\t{%s}\n" % (
-    #         ",".join([("|%s/C:") % y for y in qs_list.get(x)]))
-    #
-    # content += STATIC_QUESTIONS
-    #
-    # STDOUT.write(content)
 
 
 if __name__ == "__main__":

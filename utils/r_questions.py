@@ -152,7 +152,7 @@ TypeO = ["o", "on", "ong", "ot", "ok", "oi", "ou", "oe", "oeng", "oek"]
 TypeU = ["u", "ui", "un", "ut", "ung", "uk"]
 TypeV = ["yu", "yun", "yut"]
 
-initial = ["b, p, m, f, d, t, n, l, g, k, ng, h, gw, kw, w, z, c, s, j"]
+initial = ["b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "ng", "h", "gw", "kw", "w", "z", "c", "s", "j"]
 final = ["aa", "aai", "aau", "aam", "aan", "aang", "aap", "aat", "aak", "ai", "au", "am", "an", "ang", "ap", "at", "ak",
          "e", "eng", "ek", "ei", "eoi", "eon", "eot", "i", "iu", "im", "in", "ing", "ip", "it", "ik", "o", "on", "ong",
          "ot", "ok", "oi", "ou", "oe", "oeng", "oek", "u", "ui", "un", "ut", "ung", "uk", "yu", "yun", "yut", "ng", "m"]

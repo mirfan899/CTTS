@@ -115,43 +115,47 @@ QS "C-Labial"
 QS "C-Labial2"  
     
 ### Determine whether it is an initial, final, fine (sil+pau+sp)
-QS "C-initial"  
-QS "C-final"  
-QS "C-silence"  
-QS "L-initial"  
-QS "L-final"  
-QS "L-silence"  
-QS "R-initial"  
-QS "R-final"  
-QS "R-silence"  
+```textmate
+QS "C-initial"				{*-b+*,*-p+*,*-m+*,*-f+*,*-d+*,*-t+*,*-n+*,*-l+*,*-g+*,*-k+*,*-ng+*,*-h+*,*-gw+*,*-kw+*,*-w+*,*-z+*,*-c+*,*-s+*,*-j+*}
+QS "C-final"				{*-aa+*,*-aai+*,*-aau+*,*-aam+*,*-aan+*,*-aang+*,*-aap+*,*-aat+*,*-aak+*,*-ai+*,*-au+*,*-am+*,*-an+*,*-ang+*,*-ap+*,*-at+*,*-ak+*,*-e+*,*-eng+*,*-ek+*,*-ei+*,*-eoi+*,*-eon+*,*-eot+*,*-i+*,*-iu+*,*-im+*,*-in+*,*-ing+*,*-ip+*,*-it+*,*-ik+*,*-o+*,*-on+*,*-ong+*,*-ot+*,*-ok+*,*-oi+*,*-ou+*,*-oe+*,*-oeng+*,*-oek+*,*-u+*,*-ui+*,*-un+*,*-ut+*,*-ung+*,*-uk+*,*-yu+*,*-yun+*,*-yut+*,*-ng+*,*-m+*}
+QS "C-silence"				{*-sil+*,*-pau+*,*-sp+*}
+QS "L-initial"				{*^b-*,*^p-*,*^m-*,*^f-*,*^d-*,*^t-*,*^n-*,*^l-*,*^g-*,*^k-*,*^ng-*,*^h-*,*^gw-*,*^kw-*,*^w-*,*^z-*,*^c-*,*^s-*,*^j-*}
+QS "L-final"				{*^aa-*,*^aai-*,*^aau-*,*^aam-*,*^aan-*,*^aang-*,*^aap-*,*^aat-*,*^aak-*,*^ai-*,*^au-*,*^am-*,*^an-*,*^ang-*,*^ap-*,*^at-*,*^ak-*,*^e-*,*^eng-*,*^ek-*,*^ei-*,*^eoi-*,*^eon-*,*^eot-*,*^i-*,*^iu-*,*^im-*,*^in-*,*^ing-*,*^ip-*,*^it-*,*^ik-*,*^o-*,*^on-*,*^ong-*,*^ot-*,*^ok-*,*^oi-*,*^ou-*,*^oe-*,*^oeng-*,*^oek-*,*^u-*,*^ui-*,*^un-*,*^ut-*,*^ung-*,*^uk-*,*^yu-*,*^yun-*,*^yut-*,*^ng-*,*^m-*}
+QS "L-silence"				{*^sil-*,*^pau-*,*^sp-*} 
+QS "R-initial"				{*+b=*,*+p=*,*+m=*,*+f=*,*+d=*,*+t=*,*+n=*,*+l=*,*+g=*,*+k=*,*+ng=*,*+h=*,*+gw=*,*+kw=*,*+w=*,*+z=*,*+c=*,*+s=*,*+j=*}
+QS "R-final"				{*+aa=*,*+aai=*,*+aau=*,*+aam=*,*+aan=*,*+aang=*,*+aap=*,*+aat=*,*+aak=*,*+ai=*,*+au=*,*+am=*,*+an=*,*+ang=*,*+ap=*,*+at=*,*+ak=*,*+e=*,*+eng=*,*+ek=*,*+ei=*,*+eoi=*,*+eon=*,*+eot=*,*+i=*,*+iu=*,*+im=*,*+in=*,*+ing=*,*+ip=*,*+it=*,*+ik=*,*+o=*,*+on=*,*+ong=*,*+ot=*,*+ok=*,*+oi=*,*+ou=*,*+oe=*,*+oeng=*,*+oek=*,*+u=*,*+ui=*,*+un=*,*+ut=*,*+ung=*,*+uk=*,*+yu=*,*+yun=*,*+yut=*,*+ng=*,*+m=*}
+QS "R-silence"				{*+sil=*,*+pau=*,*+sp=*}
+```
         
 ### Part of speech  
-QS "C-POS==a"  
-QS "C-POS==b"  
-QS "C-POS==c"  
-QS "C-POS==d"  
-QS "C-POS==e"  
-QS "C-POS==f"  
-QS "C-POS==g"  
-QS "C-POS==h"  
-QS "C-POS==i"  
-QS "C-POS==j"  
-QS "C-POS==k"  
-QS "C-POS==l"  
-QS "C-POS==m"  
-QS "C-POS==n"  
-QS "C-POS==o"  
-QS "C-POS==p"  
-QS "C-POS==q"  
-QS "C-POS==r"  
-QS "C-POS==s"  
-QS "C-POS==t"  
-QS "C-POS==u"  
-QS "C-POS==v"  
-QS "C-POS==w"  
-QS "C-POS==x"  
-QS "C-POS==y"  
-QS "C-POS==z"  
+```textmate
+QS "C-POS==a"  {*_a^*}
+QS "C-POS==b"  {*_b^*}
+QS "C-POS==c"  {*_c^*}
+QS "C-POS==d"  {*_d^*}
+QS "C-POS==e"  {*_e^*}
+QS "C-POS==f"  {*_f^*}
+QS "C-POS==g"  {*_g^*}
+QS "C-POS==h"  {*_h^*}
+QS "C-POS==i"  {*_i^*}
+QS "C-POS==j"  {*_j^*}
+QS "C-POS==k"  {*_k^*}
+QS "C-POS==l"  {*_l^*}
+QS "C-POS==m"  {*_m^*}
+QS "C-POS==n"  {*_n^*}
+QS "C-POS==o"  {*_o^*}
+QS "C-POS==p"  {*_p^*}
+QS "C-POS==q"  {*_q^*}
+QS "C-POS==r"  {*_r^*}
+QS "C-POS==s"  {*_s^*}
+QS "C-POS==t"  {*_t^*}
+QS "C-POS==u"  {*_u^*}
+QS "C-POS==v"  {*_v^*}
+QS "C-POS==w"  {*_w^*}
+QS "C-POS==x"  {*_x^*}
+QS "C-POS==y"  {*_y^*}
+QS "C-POS==z"  {*_z^*}
+```
     
 ### Synthetic primitive part  
 QS "C-b"  

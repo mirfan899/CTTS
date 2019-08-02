@@ -121,6 +121,9 @@ INITIAL_QUESTIONS = [["R-initial", "*+%s=*"]]
 FINAL_QUESTIONS = [["R-final", "*+%s=*"]]
 SILENCE_QUESTIONS = [["R-silence", "*+%s=*"]]
 
+R_INITIAL_QUESTIONS = [["R", "*+%s=*"]]
+R_FINAL_QUESTIONS = [["R", "*+%s?=*"]]
+
 Stop = ["p", "t", "k", "b", "d", "g"]
 Aspirated_Stop = ["p", "t", "k"]
 Unaspirated_Stop = ["b", "d", "g"]
@@ -303,6 +306,16 @@ def main():
         s.append(SILENCE_QUESTIONS[0][1] % v)
     s = ",".join(s)
     content += "QS \"%s\"\t\t\t\t{%s}\n" % (SILENCE_QUESTIONS[0][0], s)
+    # R questions ==================================================================
+    for v in initial:
+        k = R_INITIAL_QUESTIONS[0][1] % v
+        content += "QS \"%s-%s\"\t\t\t\t{%s}\n" % (R_INITIAL_QUESTIONS[0][0], v, k)
+    for v in final:
+        k = R_FINAL_QUESTIONS[0][1] % v
+        content += "QS \"%s-%s\"\t\t\t\t{%s}\n" % (R_FINAL_QUESTIONS[0][0], v, k)
+    for v in silence:
+        k = SILENCE_QUESTIONS[0][1] % v
+        content += "QS \"R-%s\"\t\t\t\t{%s}\n" % (v,  k)
     print(content)
 
 

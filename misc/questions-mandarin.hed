@@ -430,4 +430,4 @@ CQS "Num_Prosodic-Word_in_R-Prosodic-Phrase"           {&(\d+)!}
 CQS "Num_Syl_in_Utterance"                             {^(\d+)=}
 CQS "Num_Word_in_Utterance"                            {=(\d+)_}
 CQS "Num_Prosodic-Word_in_Utterance"                   {_(\d+)-}
-CQS "Num_Prosodic-Pharse_in_Utterance"                 {-(\d+)!}
+CQS "Num_Prosodic-Phrase_in_Utterance"                 {-(\d+)!}

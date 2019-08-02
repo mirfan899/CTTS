@@ -38,14 +38,13 @@ The number of problem-focused problems is not the more the better (experience ta
 ```textmate
 Dividing Features | Description          | Primitive List
 Stop|Stop sound                          | p, t, k, b, d, g 
-Aspirated Stop|Plug air                  | p，t, k, 
+Aspirated Stop|Plug air                  | p, t, k, 
 Unaspirated Stop|Non-plugged air         | b, d, g
 Affricate|Stop sound                     | z, c
 Aspirated Affricate|Plug airing          | c
 Unaspirated Affricate|Non-serial air     | z
 Fricative|fricative                      | f, s, h
 Voiceless Fricative|Clear sound          | s
-Voice Fricative |Turbid                  |
 Nasal | nasal                            | m, n, ng
 Labial | labial                          | m, b, p
 labial2 | labial2                        | f
@@ -67,7 +66,7 @@ Type U | Vowel containing U              | u, ui, un, ut, ung, uk
 Type V | V-containing vowel              | yu, yun, yut
 ```
 
-### Vowel
+### Initial list + final list + silence
 ```textmate
 Initial                                  | b, p, m, f, d, t, n, l, g, k, ng, h, gw, kw, w, z, c, s, j
 Final                                    | aa, aai, aau, aam, aan, aang, aap, aat, aak, ai, au, am, an, ang, ap, at, ak, e, eng, ek, ei, eoi, eon, eot, i, iu, im, in, ing, ip, it, ik, o, on, ong, ot, ok, oi, ou, oe, oeng, oek, u, ui, un, ut, ung, uk, yu, yun, yut, ng, m 
@@ -110,23 +109,10 @@ QS "C-Affricate"
 QS "C-Aspirated_Affricate"  
 QS "C-Unaspirated_Affricate"  
 QS "C-Fricative"  
-QS "C-Fricative2"  
-QS "C-Voiceless_Fricative"  
-QS "C-Voice_Fricative"  
-QS "C-Nasal"  
-QS "C-Nasal2"  
+QS "C-Voiceless_Fricative"    
+QS "C-Nasal"    
 QS "C-Labial"  
 QS "C-Labial2"  
-QS "C-Apical"  
-QS "C-Apical_Front"  
-QS "C-Apical1"  
-QS "C-Apical2"  
-QS "C-Apical3"  
-QS "C-Apical_End"  
-QS "C-Apical_End2"  
-QS "C-Tongue_Top"  
-QS "C-Tongue_Root"  
-QS "C-Zero"  
     
 ### Determine whether it is an initial, final, fine (sil+pau+sp)
 QS "C-initial"  
@@ -166,7 +152,6 @@ QS "C-POS==w"
 QS "C-POS==x"  
 QS "C-POS==y"  
 QS "C-POS==z"  
-    
     
 ### Synthetic primitive part  
 QS "C-b"  
@@ -436,7 +421,6 @@ QS "LL-sp"
 QS "LL-pau"  
     
     
-    
 QS "RR-b"  
 QS "RR-p"  
 QS "RR-m"  
@@ -564,5 +548,5 @@ CQS "Num_Prosodic-Word_in_R-Prosodic-Phrase"
 CQS "Num_Syl_in_Utterance"	                     
 CQS "Num_Word_in_Utterance"	                     
 CQS "Num_Prosodic-Word_in_Utterance"	                     
-CQS "Num_Prosodic-Pharse_in_Utterance"	                     
+CQS "Num_Prosodic-Phrase_in_Utterance"	                     
     

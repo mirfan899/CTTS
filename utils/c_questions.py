@@ -124,6 +124,35 @@ SILENCE_QUESTIONS = [["C-silence", "*-%s+*"]]
 C_INITIAL_QUESTIONS = [["C", "*-%s+*"]]
 C_FINAL_QUESTIONS = [["C", "*-%s?+*"]]
 
+C_SYL_VOWEL_SIMPLE_VOWEL = [["C-Syl-Vowel-Simple_Vowel", "*@%s@*"]]
+C_SYL_VOWEL_COMPOUND_VOWEL = [["C-Syl-Vowel-Compound_Vowel", "*@%s@*"]]
+C_SYL_VOWEL_NASAL_VOWEL = [["C-Syl-Vowel-Nasal_Vowel", "*@%s@*"]]
+C_SYL_VOWEL_ANTERIOR_NASAL_VOWEL = [["C-Syl-Vowel-Anterior_Nasal_Vowel", "*@%s@*"]]
+C_SYL_VOWEL_POSTERIOR_NASAL_VOWEL = [["C-Syl-Vowel-Posterior_Nasal_Vowel", "*@%s@*"]]
+
+C_SYL_VOWEL_TYPEA = [["C-Syl-Vowel-TypeA", "*@%s@*"]]
+C_SYL_VOWEL_TYPEE = [["C-Syl-Vowel-TypeE", "*@%s@*"]]
+C_SYL_VOWEL_TYPEI = [["C-Syl-Vowel-TypeI", "*@%s@*"]]
+C_SYL_VOWEL_TYPEO = [["C-Syl-Vowel-TypeO", "*@%s@*"]]
+C_SYL_VOWEL_TYPEU = [["C-Syl-Vowel-TypeU", "*@%s@*"]]
+C_SYL_VOWEL_TYPEV = [["C-Syl-Vowel-TypeV", "*@%s@*"]]
+C_SYL_VOWEL = [["C-Syl-Vowel-", "*@%s@*"]]
+
+
+C_Syl_Vowel_Simple_Vowel = ["am", "aam", "an", "aan", "em", "im", "in", "on", "ot", "eon", "un", "yun"]
+C_Syl_Vowel_Compound_Vowel = ["ang", "aang", "eng", "ing", "ong", "ok", "oeng", "ung"]
+C_Syl_Vowel_Nasal_Vowel = ["am", "aam", "an", "aan", "em", "im", "in", "on", "ot", "eon", "un", "yun", "ang", "aang", "eng", "ing",
+               "ong", "ok", "oeng", "ung"]
+C_Syl_Vowel_Anterior_Nasal_Vowel = ["am", "aam", "an", "aan", "em", "im", "in", "on", "ot", "eon", "un", "yun"]
+C_Syl_Vowel_Posterior_Nasal_Vowel = ["ang", "aang", "eng", "ing", "ong", "ok", "oeng", "ung"]
+
+C_Syl_Vowel_TypeA = ["aa", "aai", "aau", "aam", "aan", "aang", "aap", "aat", "aak", "ai", "au", "am", "an", "ang", "ap", "at", "ak"]
+C_Syl_Vowel_TypeE = ["e", "eng", "ek", "ei", "eoi", "eon", "eot"]
+C_Syl_Vowel_TypeI = ["i", "iu", "im", "in", "ing", "ip", "it", "ik"]
+C_Syl_Vowel_TypeO = ["o", "on", "ong", "ot", "ok", "oi", "ou", "oe", "oeng", "oek"]
+C_Syl_Vowel_TypeU = ["u", "ui", "un", "ut", "ung", "uk"]
+C_Syl_Vowel_TypeV = ["yu", "yun", "yut"]
+
 Stop = ["p", "t", "k", "b", "d", "g"]
 Aspirated_Stop = ["p", "t", "k"]
 Unaspirated_Stop = ["b", "d", "g"]
@@ -316,6 +345,84 @@ def main():
     for v in silence:
         k = SILENCE_QUESTIONS[0][1] % v
         content += "QS \"C-%s\"\t\t\t\t{%s}\n" % (v, k)
+
+    # C  ==================================================================
+    s = []
+    for v in C_Syl_Vowel_Simple_Vowel:
+        s.append(C_SYL_VOWEL_SIMPLE_VOWEL[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_SIMPLE_VOWEL[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_Compound_Vowel:
+        s.append(C_SYL_VOWEL_COMPOUND_VOWEL[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_COMPOUND_VOWEL[0][0], s)
+    s = []
+    for v in C_Syl_Vowel_Nasal_Vowel:
+        s.append(C_SYL_VOWEL_NASAL_VOWEL[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_NASAL_VOWEL[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_Anterior_Nasal_Vowel:
+        s.append(C_SYL_VOWEL_ANTERIOR_NASAL_VOWEL[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_ANTERIOR_NASAL_VOWEL[0][0], s)
+    s = []
+    for v in C_Syl_Vowel_Posterior_Nasal_Vowel:
+        s.append(C_SYL_VOWEL_POSTERIOR_NASAL_VOWEL[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_POSTERIOR_NASAL_VOWEL[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_TypeA:
+        s.append(C_SYL_VOWEL_TYPEA[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_TYPEA[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_TypeE:
+        s.append(C_SYL_VOWEL_TYPEE[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_TYPEE[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_TypeI:
+        s.append(C_SYL_VOWEL_TYPEI[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_TYPEI[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_TypeO:
+        s.append(C_SYL_VOWEL_TYPEO[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_TYPEO[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_TypeU:
+        s.append(C_SYL_VOWEL_TYPEE[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_TYPEU[0][0], s)
+
+    s = []
+    for v in C_Syl_Vowel_TypeV:
+        s.append(C_SYL_VOWEL_TYPEE[0][1] % v)
+    s = ",".join(s)
+    content += "QS \"%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL_TYPEV[0][0], s)
+
+    for v in Simple_Final:
+        k = C_SYL_VOWEL[0][1] % v
+        content += "QS \"%s%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL[0][0], v, k)
+
+    for v in Compound_Final:
+        k = C_SYL_VOWEL[0][1] % v
+        content += "QS \"%s%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL[0][0], v, k)
+
+    for v in Nasal_Vowel:
+        k = C_SYL_VOWEL[0][1] % v
+        content += "QS \"%s%s\"\t\t\t\t{%s}\n" % (C_SYL_VOWEL[0][0], v, k)
+
     print(content)
 
 

@@ -1,7 +1,7 @@
+import codecs
 import os
 import re
 import logging
-from pypinyin import pinyin, Style, load_phrases_dict
 import textgrid as tg
 from jyutping import get_jyutping
 from mandarin_frontend import txt2label
@@ -12,13 +12,6 @@ consonant = [
 ]
 
 
-def _pre_pinyin_setting():
-    ''' fix pinyin error'''
-    load_phrases_dict({'嗯': [['ēn']]})
-    load_phrases_dict({'风云变幻': [['fēng'], ['yún'], ['bià'], ['huàn']]})
-    load_phrases_dict({'不破不立': [['bù'], ['pò'], ['bù'], ['lì']]})
-
-
 def _add_lab(txtlines, wav_dir_path):
     logger = logging.getLogger('mtts')
     for line in txtlines:
@@ -26,7 +19,6 @@ def _add_lab(txtlines, wav_dir_path):
         # remove prosody marks
         txt = re.sub('#\d', '', txt)
         # add jyutping
-        # pinyin_list = pinyin(txt, style=Style.TONE3)
         pinyin_list = get_jyutping(txt)
         pinyin_list = [[item] for item in pinyin_list]
         new_pinyin_list = []
@@ -46,13 +38,11 @@ def _add_lab(txtlines, wav_dir_path):
 
 def _add_jyutping_txt(txtlines, path=None):
     logger = logging.getLogger('mtts')
-    print(path)
     for line in txtlines:
         numstr, txt = line.split(' ')
         # remove prosody marks
         txt = re.sub('#\d', '', txt)
         # add jyutping
-        # pinyin_list = pinyin(txt, style=Style.TONE3)
         pinyin_list = get_jyutping(txt)
         pinyin_list = [[item] for item in pinyin_list]
         new_pinyin_list = []

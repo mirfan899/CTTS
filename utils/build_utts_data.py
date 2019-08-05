@@ -14,4 +14,9 @@ for file in glob.glob("../data/txt/*.txt"):
     sentence = "{} {}".format(name.strip(), lines.strip())
     # Some weird space in chinese
     sentence = re.sub(r"﻿", "", sentence)
+    sentence = re.sub(r"。", "", sentence)
+    sentence = re.sub(r"，", "", sentence)
+    sentence = re.sub(r",", "", sentence)
+    sentence = sentence.replace(".", "")
+    # sentence = re.sub(r".", "", sentence)
     utts.write(sentence + "\n")

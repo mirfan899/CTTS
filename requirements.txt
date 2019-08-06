@@ -1,4 +1,3 @@
-jieba
 pypinyin
 pandas
 nltk

@@ -17,7 +17,12 @@ bin/mfa_train_and_align
 bin/mfa_train_and_align /Users/mirfan/PycharmProjects/MTTS/data/cantonese_demo/wav /Users/mirfan/PycharmProjects/MTTS/misc/cantonese_mtts.lexicon  /Users/mirfan/PycharmProjects/MTTS/data/cantonese_demo/output/textgrid
 ```
 
-### Shell commands(count files in a directory with extenstion)
+### testing
+```shell
+bin/mfa_train_and_align /Users/mirfan/Desktop/audacity/week6_clean/ /Users/mirfan/PycharmProjects/MTTS/misc/cantonese_mtts.lexicon  /Users/mirfan/Desktop/audacity/week6_textgrid
+```
+
+### Shell commands(count files in a directory with file extension)
 ```shell
 find . -type f -name "*.wav" | wc -l
 ```

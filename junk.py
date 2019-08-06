@@ -119,7 +119,7 @@ print(words, poses, rhythms)
 
 # print(rhythms)
 consonant_list = [
-    'b', 'P', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'ng', 'h', 'gw', 'kw', 'w', 'z', 'c', 's', 'j'
+    'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'ng', 'h', 'gw', 'kw', 'w', 'z', 'c', 's', 'j'
 ]
 syllable = "taan1"
 assert syllable[-1].isdigit()

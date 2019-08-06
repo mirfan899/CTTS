@@ -36,5 +36,5 @@ def segmentation(sentence=None):
     return segments
 
 
-segments = segmentation('咁都真係天公做美啦，因為呢天氣真係好好，好涼爽。')
-print(segments)
+# segments = segmentation('咁都真係天公做美啦，因為呢天氣真係好好，好涼爽。')
+# print(segments)

@@ -130,7 +130,6 @@ def add_head_middle_tail_silence(root_node, phs_type):
 
 
 def tree(words, rhythms, syllables, poses, phs_type=None):
-    print("checking words, rhythms and poses    ========================")
     assert len(words) == len(rhythms)
     assert len(words) == len(poses)
     assert len(''.join(words)) == len(syllables)
@@ -156,7 +155,6 @@ def tree(words, rhythms, syllables, poses, phs_type=None):
     # show(tree_init['rhythm4'], 0)
 
     root_node = tree_init['#4'][0]
-    print("Checked words, rhythms and poses    ========================")
     return add_head_middle_tail_silence(root_node, phs_type)
 
 

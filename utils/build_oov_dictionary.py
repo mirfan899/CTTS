@@ -33,4 +33,4 @@ total = pd.DataFrame({"chinese": chinese.values.ravel(), "jyut": jyut.values.rav
 # total = pd.DataFrame({"chinese": chinese., "jyut": jyut.values.tolist()})
 
 # total.to_csv("cantonese_dict.csv", index=False)
-total.to_csv("cantonese_dict_missing.csv", sep=' ', index=False, header=False)
+total.to_csv("../data/cantonese_dict_missing.csv", sep=' ', index=False, header=False)

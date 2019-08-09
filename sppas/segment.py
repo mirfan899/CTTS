@@ -5,7 +5,7 @@ sys.path.append(path)
 
 print(path)
 from sppas import sppasTextNorm
-# fileio = open("./cn.txt", "w")
+# fileio = open("./temp.txt", "w")
 # fileio.write('咁都真係天公做美啦，因為呢天氣真係好好，好涼爽。')
 # fileio.close()
 # fileio = "./cn.txt"
@@ -24,10 +24,10 @@ def segmentation(sentence=None):
     """
     segments = []
     # Create a temp file for segmentation for sppas
-    fileio = open("./temp.txt", "w")
+    fileio = open("temp.txt", "w")
     fileio.write(sentence)
     fileio.close()
-    fileio = "./temp.txt"
+    fileio = "temp.txt"
     trs = ann.run([fileio])
     for tier in trs:
         if tier.get_name() == "Tokens":

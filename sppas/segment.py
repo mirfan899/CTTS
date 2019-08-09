@@ -24,10 +24,10 @@ def segmentation(sentence=None):
     """
     segments = []
     # Create a temp file for segmentation for sppas
-    fileio = open("./cn.txt", "w")
+    fileio = open("./temp.txt", "w")
     fileio.write(sentence)
     fileio.close()
-    fileio = "./cn.txt"
+    fileio = "./temp.txt"
     trs = ann.run([fileio])
     for tier in trs:
         if tier.get_name() == "Tokens":

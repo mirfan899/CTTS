@@ -40,7 +40,7 @@ for ch, ph in zip(chinese, phonemes):
 
 print(len(dic))
 
-with open('./cantonese_mtts.lexicon', "w") as file:
+with open('misc/cantonese_mtts.lexicon', "w") as file:
     for key, val in dic.items():
         line = key + ' ' + val
         file.write(line.strip())

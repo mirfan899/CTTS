@@ -31,3 +31,25 @@ rm wav/*.m4a
 rm wav/*.wav
 cp *.wav wav/
 ```
+
+### Train mfa to generate TextGrid files
+I'm using `mfa_train_and_align` to generate textgrid files.
+```shell
+cd tools
+./run_mfa.sh
+```
+
+### Build lab files
+It will generate the necessary files for Merlin TTS. 
+```shell
+./run_cantonese.sh
+```
+
+### Build Question Set
+Run following scripts to get questions for Cantonese.
+```shell
+python utils/c_questions.py
+python utils/r_questions.py
+python utils/l_questions.py
+```
+Copy the output of each file to question set file.

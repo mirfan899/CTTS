@@ -132,3 +132,14 @@ elif syllable[0] in consonant_list:
 else:
     # return (syllable.encode('utf-8'),)
     print(syllable)
+
+# regex for cleaning transcripts
+"""。（[0-9]+）"""
+"""”（[0-9]+）"""
+"""。“（[0-9]+）"""
+"""？（[0-9]+）"""
+"""！“（[0-9]+）"""
+"""？“（[0-9]+）"""
+"""！（[0-9]+）"""
+"""[。，：“”！？]+"""
+"""“（[0-9]+）"""

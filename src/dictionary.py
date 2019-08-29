@@ -3,13 +3,14 @@ eSpeak Dictionary
 """
 from __future__ import absolute_import
 import io
-
+import os
 CHS_DICT = {}
+path = os.path.dirname(os.path.abspath(__file__))
 
 
 def load_dictionary():
 
-    dictionary_file = "/Users/mirfan/PycharmProjects/MTTS/src/dictionary/zhy_jyut_cantonese.tsv"
+    dictionary_file = path + "/dictionary/zhy_jyut_cantonese.tsv"
     # logger.log('Load dictionary %s.' % dictionary_file)
     with io.open(dictionary_file, mode='r', encoding='utf-8') as f:
         for line in f:

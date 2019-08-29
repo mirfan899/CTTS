@@ -1,5 +1,5 @@
 import pandas as pd
-dictionary = pd.read_csv("/Users/mirfan/PycharmProjects/MTTS/src/dictionary/zhy_jyut_cantonese.tsv", sep='\t')
+dictionary = pd.read_csv("../src/dictionary/zhy_jyut_cantonese.tsv", sep='\t')
 
 consonant_list = [
     'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'ng', 'h', 'gw', 'kw', 'w', 'z', 'c', 's', 'j'
@@ -31,7 +31,7 @@ for ch, ph in zip(chinese, phonemes):
 
 print(len(dic))
 
-with open('misc/cantonese_mtts.lexicon', "w") as file:
+with open('../misc/cantonese_mtts.lexicon', "w") as file:
     for key, val in dic.items():
         line = key + ' ' + val
         file.write(line.strip())

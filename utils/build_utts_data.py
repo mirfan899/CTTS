@@ -4,8 +4,6 @@ import re
 
 from utils.cleaner import clean_line, clean_name
 
-utts = open("../data/cantonese_demo/cantonese_utts.txt", "w", encoding='utf-8')
-
 
 def generate_utts_from_files():
     utts = open("../data/cantonese_demo/cantonese_utts.txt", "w", encoding='utf-8')

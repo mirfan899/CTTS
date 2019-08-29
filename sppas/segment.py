@@ -3,7 +3,6 @@ import sys
 path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(path)
 
-print(path)
 from sppas import sppasTextNorm
 # fileio = open("./temp.txt", "w")
 # fileio.write('咁都真係天公做美啦，因為呢天氣真係好好，好涼爽。')
@@ -36,5 +35,5 @@ def segmentation(sentence=None):
     return segments
 
 
-# segments = segmentation('咁都真係天公做美啦，因為呢天氣真係好好，好涼爽。')
-# print(segments)
+segments = segmentation('那是公元前二百四十六年至二百十年兩千多年前的事了')
+print(segments)

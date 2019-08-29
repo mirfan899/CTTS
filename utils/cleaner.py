@@ -9,9 +9,9 @@ def clean_line(line):
     line = re.sub("""！“（[0-9]+）""", "", line)
     line = re.sub("""？“（[0-9]+）""", "", line)
     line = re.sub("""！（[0-9]+）""", "", line)
-    line = re.sub("""[。，：“”！？]+""", "", line)
+    line = re.sub("""[。，：“”！？. ]+""", "", line)
     line = re.sub("""“（[0-9]+）""", "", line)
-    line = re.sub("""[.]+""", "", line)
+    line = re.sub("""（[0-9]+）""", "", line)
     return line
 
 

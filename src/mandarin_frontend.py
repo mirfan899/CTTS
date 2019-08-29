@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-# -*- encoding:utf-8 -*-
-
 from __future__ import unicode_literals
 import re
 import os
@@ -11,7 +9,6 @@ from txt2pinyin import txt2pinyin, seprate_syllable
 from jyutping import get_jyutping
 import sys
 sys.path.append('..')
-print(sys.path)
 from MTTS.sppas import segment
 from MTTS.pos import pos
 
@@ -21,7 +18,6 @@ def _adjust(prosody_txt):
     prosody_words = re.split('#\d', prosody_txt)
     rhythms = re.findall('#\d', prosody_txt)
     txt = ''.join(prosody_words)
-    print("Calling _adjust===============================")
     # add Cantonese segmentation and pos
     wrd = segment.segmentation(sentence=txt)
     words, poses = pos.get_tags(wrd)
@@ -101,9 +97,6 @@ def txt2label(txt, sfsfile=None, style='default'):
 
         rhythms = ['#0'] * (len(words) - 1)
         rhythms.append('#4')
-    print(len(rhythms))
-    print(len(words))
-    print(len(poses))
     # syllables = txt2pinyin(''.join(words))
 
     # txt2jyutping

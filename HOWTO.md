@@ -17,11 +17,15 @@ cp data/wav/*.m4a backup
 
 Now make a temp directory and convert wav files to 16khz 16 bit wav files
 ```shell
-mkdir ../temp
-temp_dir=../temp
+mkdir wav
+wav_dir=wav
 for i in *.wav; do
-  ffmpeg -i ${i} -acodec pcm_s16le -ac 1 -ar 16000 ${temp_dir}/${i};
+  ffmpeg -i ${i} -acodec pcm_s16le -ac 1 -ar 16000 ${wav_dir}/${i};
 done
+
+rm *.wav
+mkdir m4a
+mv *.m4a m4a
 ```
 
 Copy converted wav files back to original location.
@@ -53,3 +57,5 @@ python utils/r_questions.py
 python utils/l_questions.py
 ```
 Copy the output of each file to question set file.
+### Use frontend-tts for Ossian with Jyutping txts and wavs
+### Use instance-2 for Merlin with labels and wavs.

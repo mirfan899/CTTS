@@ -1,14 +1,29 @@
 ### Setup Ossian
+Install libraries
 ```shell script
 sudo apt install libncurses5-dev
-sudo apt-get install clang libsndfile1-dev gsl-bin libgsl0-dev libconfig-dev
+sudo apt-get install clang libsndfile1-dev gsl-bin libgsl0-dev libconfig-dev g++-4.8 g++-4.8
 ```
 
-https://askubuntu.com/questions/932758/how-to-remove-a-symlink-from-usr-bin-python-in-ubuntu
+Clone and compile
+```shell script
+git clone https://github.com/CSTR-Edinburgh/Ossian.git
+cd Ossian
+./scripts/setup_tools.sh mirfan899 Tqveb=Be
+```
+### Directory Structure
+```shell script
+mkdir corpus
+mkdir corpus/cn
+mkdir corpus/cn/speakers
+mkdir corpus/cn/speakers/toy_cn_corpus
+mkdir corpus/cn/speakers/toy_cn_corpus/txt
+mkdir corpus/cn/speakers/toy_cn_corpus/wav
+```
 
 ### Python dependencies
 ```shell script
-sudo pip install numpy scipy regex argparse lxml scikit-learn regex configobj
+pip install numpy scipy regex argparse lxml scikit-learn regex configobj
 ```
 
 ### Dependencies for merlin
@@ -68,12 +83,7 @@ update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
 ```
 
-### HTK installation
-#http://htk.eng.cam.ac.uk/download.shtml
-```shell script
-bash tools/compile_htk.sh mirfan899 Tqveb=Be
-```
-# connect to gcp SSH
+### connect to gcp SSH
 ```shell script
 gcloud alpha cloud-shell ssh
 ```

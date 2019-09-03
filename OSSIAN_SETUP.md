@@ -1,14 +1,25 @@
 ### Setup Ossian
 Install libraries
 ```shell script
-sudo apt install libncurses5-dev
+sudo apt-get install libncurses5-dev
 sudo apt-get install clang libsndfile1-dev gsl-bin libgsl0-dev libconfig-dev g++-4.8 g++-4.8
+sudo apt-get install software-properties-common python-software-properties build-essential libc-dev
+sudo apt-get install sox curl libicu-dev python python-dev python-setuptools unzip wget
+sudo apt-get install realpath
+sudo apt-get install coreutils
+sudo apt-get install autotools-dev
+sudo apt-get install automake
+sudo apt-get update
 ```
 
 Clone and compile
 ```shell script
 git clone https://github.com/CSTR-Edinburgh/Ossian.git
 cd Ossian
+apt install python-virtualenv
+virtualenv -p python2 .mytts
+source ./mytts/bin/activate
+pip install numpy scipy regex argparse lxml scikit-learn regex configobj
 ./scripts/setup_tools.sh mirfan899 Tqveb=Be
 ```
 ### Directory Structure
@@ -23,7 +34,7 @@ mkdir corpus/cn/speakers/toy_cn_corpus/wav
 
 ### Python dependencies
 ```shell script
-pip install numpy scipy regex argparse lxml scikit-learn regex configobj
+pip install numpy scipy regex argparse lxml scikit-learn regex configobj python-virtualenv
 ```
 
 ### Dependencies for merlin

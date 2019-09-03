@@ -9,6 +9,7 @@ sudo apt-get install realpath
 sudo apt-get install coreutils
 sudo apt-get install autotools-dev
 sudo apt-get install automake
+sudo apt-get install ffmpeg
 sudo apt-get update
 ```
 

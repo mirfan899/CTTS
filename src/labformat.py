@@ -124,7 +124,6 @@ def add_head_middle_tail_silence(root_node, phs_type):
     if phs_type[-1] in ['s', 'd']:
         phone.rbrother = LabNode(txt='sil', rhythm='ph')
         phone.rbrother.lbrother = phone
-    print("Success till yet===================================================")
 
     return fphone
 

@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(path)
@@ -37,3 +38,33 @@ def segmentation(sentence=None):
 
 segments = segmentation('那是公元前二百四十六年至二百十年兩千多年前的事了')
 print(segments)
+
+
+def cline(line):
+    line = re.sub("""([0-9A-Za-z 。，：“”！？.\s（）]+)""", "", line)
+    return line
+
+
+def cname(name):
+    name = re.sub("[.]+", "", name)
+    return name
+
+
+def build_segmented_files():
+    lines = open("../data/1000_uncleaned.txt", "r", encoding='utf8').readlines()
+    lines = [line.strip() for line in lines if line.strip()]
+
+    for index, line in enumerate(lines):
+        file, line = line.split("\t")
+        line = re.sub("""([0-9A-Za-z 。，：“”！？.\s（）]+)""", "", line)
+        line = cline(line)
+        file = cname(file)
+        line = segmentation(sentence=line)
+        print(line)
+        txt = open("../data/segmentation/{}.txt".format(file), "w", encoding='utf8')
+        txt.write(line)
+        txt.close()
+
+
+if __name__ == '__main__':
+    build_segmented_files()

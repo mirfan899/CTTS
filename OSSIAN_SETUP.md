@@ -3,7 +3,7 @@ Install required libraries for Ossian TTS
 ```shell script
 sudo apt-get install libncurses5-dev
 sudo apt-get install clang libsndfile1-dev gsl-bin libgsl0-dev libconfig-dev g++-4.8 g++-4.8
-sudo apt-get install software-properties-common python-software-properties build-essential libc-dev
+sudo apt-get install software-properties-common python-software-properties build-essential libc-dev python3-virtualenv python3-pip
 sudo apt-get install sox curl libicu-dev python python-dev python-pip python-setuptools unzip wget
 sudo apt-get install realpath
 sudo apt-get install coreutils

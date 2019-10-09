@@ -1,18 +1,11 @@
-### 本项目自行设计的上下文标注
+### Cantonese Label
 
-设置此中文上下文标注和对应问题集时参考了
 * [HTS label](http://www.cs.columbia.edu/~ecooper/tts/lab_format.pdf)
 label format for Cantonese(both are same)
 * [HTS_LABEL](https://wiki.inf.ed.ac.uk/twiki/pub/CSTR/F0parametrisation/hts_lab_format.pdf)
 * [Merlin Questions](https://github.com/CSTR-Edinburgh/merlin/tree/master/misc/questions)
 
-对应的 [Question set](./questions-mandarin.hed)
-
-备注：
-* 没有设计语调短语层和段落层
-* 也没有设置重音标注
-* @&#$!^-+=以及/A:/B:...的使用主要是为了正则表达式匹配方便，10个符号(@&#$!^-+=)共有100个匹配组合，即可以匹配100个属性
-* 如果前后位置的基元不存在的话，用xx代替，例如 xx^sil-w+o=sh 
+[Question set](./questions-mandarin.hed)
 
 ```
 层级          标注格式  

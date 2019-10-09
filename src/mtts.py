@@ -4,7 +4,7 @@ import re
 import logging
 import textgrid as tg
 from jyutping import get_jyutping
-from mandarin_frontend import txt2label
+from cantonese_frontend import txt2label
 import textgrid
 
 consonant = [

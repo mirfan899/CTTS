@@ -11,9 +11,9 @@ This is only a demo of mandarin frontend which is lack of some parts like "text 
 3. Using [merlin/egs/mandarin_voice](https://github.com/CSTR-Edinburgh/merlin/tree/master/egs/cantonese_voice) to train and generate Cantonese Voice
 
 ## Context related annotation & Question Set
-* [Context related annotation上下文相关标注](https://github.com/Jackiexiao/MTTS/blob/master/misc/mandarin_label.md)
-* [Question Set问题集](https://github.com/Jackiexiao/MTTS/blob/master/misc/questions-mandarin.hed)
-* [Rules to design a Question Set问题集设计规则](https://github.com/Jackiexiao/MTTS/blob/master/docs/mddocs/question.md)
+* [Context related annotation](https://github.com/Jackiexiao/MTTS/blob/master/misc/mandarin_label.md)
+* [Question Set](https://github.com/Jackiexiao/MTTS/blob/master/misc/questions-mandarin.hed)
+* [Rules to design a Question Set](https://github.com/Jackiexiao/MTTS/blob/master/docs/mddocs/question.md)
 
 ## Install
 Python : python3.6  
@@ -24,8 +24,6 @@ sudo apt-get install libatlas3-base
 Run `bash tools/install_mtts.sh`  
 **Or** download file by yourself
 * Download [montreal-forced-aligner](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases/download/v1.0.0/montreal-forced-aligner_linux.tar.gz) and unzip to directory tools/  
-* Download acoustic_model
-[thchs30.zip](https://github.com/Jackiexiao/MTTS/releases/download/v0.1/thchs30.zip) and copy to directory misc/  
 
 **Run Demo**
 ```
@@ -57,9 +55,6 @@ from mandarin_frontend import txt2label
 result = txt2label('向香港特别行政区同胞澳门和台湾同胞海外侨胞')
 [print(line) for line in result]
 
-# with prosody mark and alignment file (sfs file)
-# result = txt2label('向#1香港#2特别#1行政区#1同胞#4澳门#2和#1台湾#1同胞#4海外#1侨胞',
-            sfsfile='example_file/example.sfs')
 ```
 see [source
 code](https://github.com/Jackiexiao/MTTS/blob/master/src/mandarin_frontend.py) for more information, but pay attention to the alignment file(sfs file), the format is `endtime phone_type` not `start_time, phone_type`(which is different from speech ocean's data)
@@ -72,14 +67,6 @@ This project use [Montreal-Forced-Aligner](https://github.com/MontrealCorpusTool
 ## Prosody Mark
 You can generate HTS Label without prosody mark. we assume that word segment is
 smaller than prosodic word(which is adjusted in code)
-
-"#0","#1", "#2","#3" and "#4" are the prosody labeling symbols.
-* #0 stands for word segment
-* #1 stands for prosodic word
-* #2 stands for stressful word (actually in this project we regrad it as #1)
-* #3 stands for prosodic phrase
-* #4 stands for intonational phrase 
-
 
 ## Improvement to be done in future
 * Text Normalization

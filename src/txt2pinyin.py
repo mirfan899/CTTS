@@ -5,10 +5,6 @@ import re
 from pypinyin import pinyin, Style, load_phrases_dict
 from jyutping import get_jyutping
 
-# consonant_list = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k',
-#                   'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z',
-#                   'c', 's', 'y', 'w']
-
 consonant_list = [
     'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'ng', 'h', 'gw', 'kw', 'w', 'z', 'c', 's', 'j'
 ]
@@ -59,7 +55,7 @@ _pre_pinyin_setting()
 
 
 def pinyinformat(syllable):
-    '''format pinyin to mtts's format'''
+    """format pinyin to mtts's format"""
     if not syllable[-1].isdigit():
         syllable = syllable + '5'
         # syllable = syllable + '7'
@@ -96,14 +92,14 @@ def seprate_syllable(syllable):
 
 def txt2pinyin(txt):
     phone_list = []
-    '''
+    """
     if isinstance(txt, str):
         pinyin_list = pinyin(unicode(txt,'utf-8'), style = Style.TONE3)
     elif isinstance(txt, unicode):
         pinyin_list = pinyin(txt, style = Style.TONE3)
     else:
         print('error: unsupport coding form')
-    '''
+    """
 
     pinyin_list = get_jyutping(txt)
     # assert len(pinyin_list) == len(list(txt))
@@ -119,11 +115,11 @@ if __name__ == '__main__':
     # print(txt2pinyin('整完香腸同埋蛋之後呢我就叫馮曉立起身咁佢起咗身我哋一齊食早餐呢我先至開始拾嗰隻糭'))
     print(txt2pinyin("".join("中华人 民共和国 论居然")))
 
-'''
+"""
 用法举例
 print(txt2pinyin('中华人民共和国论居然'))
 ['zh ong1', 'h ua2', 'r en2', 'm in2', 'g ong4', 'h e2', 'g uo2', 'l uen4', 'j
 v1', 'r an2']
-'''
+"""
 
 

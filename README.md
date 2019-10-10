@@ -3,12 +3,12 @@
 Cantonese/Chinese Text to Speech based on statistical parametric speech 
 synthesis using merlin toolkit
 
-This is only a demo of mandarin frontend which is lack of some parts like "text normalization" and "prosody prediction", and the phone set && Question Set this project use have not fully tested yet.
+This project is influenced by [MTTS](https://github.com/Jackiexiao/MTTS)
 
 ## How To Reproduce
 1. First, you need data contain wav and txt (prosody mark is optional)
 2. Second, generate HTS label using this project 
-3. Using [merlin/egs/mandarin_voice](https://github.com/CSTR-Edinburgh/merlin/tree/master/egs/cantonese_voice) to train and generate Cantonese Voice
+3. Using [merlin/egs/cantonese_voice](https://github.com/mirfan899/merlin/tree/master/egs/cantonese_voice) to train and generate Cantonese Voice
 
 ## Context related annotation & Question Set
 * [Context related annotation](https://github.com/Jackiexiao/MTTS/blob/master/misc/mandarin_label.md)
@@ -33,7 +33,7 @@ bash run_demo.sh
 ### 1. Generate HTS Label by wav and text
 * Usage: Run `python src/mtts.py txtfile wav_directory_path output_directory_path` (Absolute path or relative path) Then you will get HTS label, if you have your own acoustic model trained by monthreal-forced-aligner, add`-a your_acoustic_model.zip`, otherwise, this project use thchs30.zip acoustic model as default
 * Attention: Currently only support Chinese Character, txt should not have any
-    Arabia number or English alphabet(不可包含阿拉伯数字和英文字符)
+    Arabia number or English alphabet
 
 **txtfile example**
 ```
@@ -56,13 +56,11 @@ result = txt2label('向香港特别行政区同胞澳门和台湾同胞海外侨
 [print(line) for line in result]
 
 ```
-see [source
-code](https://github.com/Jackiexiao/MTTS/blob/master/src/mandarin_frontend.py) for more information, but pay attention to the alignment file(sfs file), the format is `endtime phone_type` not `start_time, phone_type`(which is different from speech ocean's data)
+see [source code](https://github.com/mirfan899/MTTS/blob/master/src/cantonese_frontend.py) for more information, but pay attention to the alignment file(sfs file), the format is `endtime phone_type` not `start_time, phone_type`(which is different from speech ocean's data)
 
 ### 3. Forced-alignment
 This project use [Montreal-Forced-Aligner](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner) to do forced alignment, if you want to get a better alignment, use your data to train a alignment-model, see [mfa: algin-using-only-the-dataset](https://montreal-forced-aligner.readthedocs.io/en/latest/aligning.html#align-using-only-the-data-set)
 1. We trained the acoustic model on our dataset.
-2. If you want to use mfa's (montreal-forced-aligner) pre-trained mandarin model, this is the dictionary you need [mandarin-for-montreal-forced-aligner-pre-trained-model.lexicon](https://github.com/Jackiexiao/MTTS/blob/master/misc/mandarin-for-montreal-forced-aligner-pre-trained-model.lexicon)
 
 ## Prosody Mark
 You can generate HTS Label without prosody mark. we assume that word segment is

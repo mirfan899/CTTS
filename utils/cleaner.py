@@ -2,7 +2,7 @@ import re
 
 
 def clean_line(line):
-    line = re.sub("""([0-9A-Za-z 。，：“”！？.\s（）、——；‘]+)""", "", line)
+    line = re.sub("([0-9A-Za-z 。，：“”！？.（）、—；‘]+)", "", line)
     return line
 
 
